@@ -1,0 +1,70 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+# Implementation Tables
+# Table Product
+type Product {
+  _id: ID!
+  nama: String!
+  stok: String!
+  harga: String!
+}
+
+# Table User
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+}
+
+# Configuration Query Product
+type Query {
+  products: [Product!]!
+  product(id: ID!): Product!
+}
+
+# Service Create Product
+input CreateProduct {
+  nama: String!
+  stok: String!
+  harga: String!
+}
+
+# Service Update Product
+input UpdateProduct {
+  nama: String!
+  stok: String!
+  harga: String!
+}
+
+# Service Delete Product
+type DeleteProduct {
+  deletedProductId: String!
+}
+
+# Service Create User
+input NewUser {
+  name: String!
+  email: String!
+  password: String!
+}
+
+# Service Login
+input Login {
+  email: String!
+  password: String!
+}
+
+# Implementation Services
+type Mutation {
+  # User
+  createUser(input: NewUser!): User!
+  login(input: Login!): String!
+
+  # Product
+  createProduct(input: CreateProduct!): Product!
+  updateProduct(id: ID!, input: UpdateProduct!): Product!
+  deleteProduct(id: ID!): DeleteProduct!
+}
