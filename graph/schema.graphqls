@@ -1,0 +1,68 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  getProductByID(id: ID!): ProductResponse!
+  getAllProducts: [ProductResponse!]!
+}
+
+type Mutation {
+  login(input: LoginRequest!): LoginResponse!
+  register(input: RegisterRequest!): RegisterResponse!
+  logout(input: LogoutRequest!): LogoutResponse!
+
+  createProduct(input: ProductRequest!): ProductResponse!
+  updateProduct(id: ID!, input: ProductRequest!): ProductResponse!
+  deleteProduct(id: ID!): Status!
+}
+
+input ProductRequest {
+  name: String!
+  stock: Int!
+  price: Float!
+}
+
+type ProductResponse {
+  id: ID!
+  name: String!
+  stock: Int!
+  price: Float!
+}
+
+input LoginRequest {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  token: String!
+}
+
+input RegisterRequest {
+  name: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+type RegisterResponse {
+  message: String!
+}
+
+input LogoutRequest {
+  token: String!
+}
+
+type LogoutResponse {
+  message: String!
+}
+
+type Status {
+  status: String!
+}
